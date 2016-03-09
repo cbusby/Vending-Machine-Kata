@@ -17,6 +17,6 @@ class CoinValidatorSpec extends Specification {
 		CoinValidator coinValidator = new CoinValidator()
 
 		expect:
-		1 == coinValidator.returnCoinValue(1, 1)
+		1.0 == coinValidator.returnCoinValue(1.0, 1.0)
 	}
 }

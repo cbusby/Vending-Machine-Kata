@@ -5,7 +5,7 @@ class CoinValidator {
 	static constraints = {
 	}
 
-	int returnCoinValue(int circumference, int weight) {
-		return 1
+	double returnCoinValue(double circumference,double weight) {
+		return 1.0
 	}
 }
