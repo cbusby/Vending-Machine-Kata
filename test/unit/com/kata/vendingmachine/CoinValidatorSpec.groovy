@@ -24,10 +24,19 @@ class CoinValidatorSpec extends Specification {
 
 	void "given a valid quarter circumference and weight, returnCoinValue will return 0.25USD"() {
 		given:
-		Coin quarter = new Coin(circumference: 24.26, weight: 5.67).save(flush: true)
+		new Coin(circumference: 24.26, weight: 5.67, dollarAmount: 0.25).save(flush: true)
 		CoinValidator coinValidator = new CoinValidator()
 
 		expect:
 		0.25 == coinValidator.returnCoinValue(24.26, 5.67)
+	}
+
+	void "given a valid dime circumference and weight, returnCoinValue will return 0.10USD"() {
+		given:
+		new Coin(circumference: 17.91, weight: 2.268, dollarAmount: 0.10).save(flush: true)
+		CoinValidator coinValidator = new CoinValidator()
+
+		expect:
+		0.10 == coinValidator.returnCoinValue(17.91, 2.268)
 	}
 }
