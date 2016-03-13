@@ -7,13 +7,6 @@ import spock.lang.Specification
 @TestFor(CoinValidator)
 @Mock(Coin)
 class CoinValidatorSpec extends Specification {
-
-	def setup() {
-	}
-
-	def cleanup() {
-	}
-
 	void "given a penny circumference and weight, returnCoinValue will return 0.0USD as a penny is not valid"() {
 		given:
 		CoinValidator coinValidator = new CoinValidator()
