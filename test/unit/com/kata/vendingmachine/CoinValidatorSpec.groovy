@@ -1,9 +1,11 @@
 package com.kata.vendingmachine
 
+import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
 @TestFor(CoinValidator)
+@Mock(Coin)
 class CoinValidatorSpec extends Specification {
 
 	def setup() {
@@ -12,11 +14,11 @@ class CoinValidatorSpec extends Specification {
 	def cleanup() {
 	}
 
-	void "given a circumference and weight returnCoinValue will return an integer as the USD value"() {
+	void "given a penny circumference and weight, returnCoinValue will return 0.0USD as a penny is not valid"() {
 		given:
 		CoinValidator coinValidator = new CoinValidator()
 
 		expect:
-		1.0 == coinValidator.returnCoinValue(1.0, 1.0)
+		0.0 == coinValidator.returnCoinValue(19.05, 2.5)
 	}
 }
