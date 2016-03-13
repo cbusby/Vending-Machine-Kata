@@ -8,7 +8,14 @@ class CoinValidator {
 	static constraints = {
 	}
 
-	double returnCoinValue(double circumference,double weight) {
-		return 0.0
+	double returnCoinValue(double circumference, double weight) {
+		Coin coin = Coin.findByCircumferenceAndWeight(circumference, weight)
+
+		if (!coin) {
+			return 0.0
+		} else {
+			return 0.25
+		}
+
 	}
 }
