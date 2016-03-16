@@ -3,18 +3,14 @@ package com.kata.vendingmachine
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
-/**
- * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
- */
 @TestFor(TransactionTracker)
 class TransactionTrackerSpec extends Specification {
 
-	def setup() {
-	}
+	void "TransactionTracker cannot have a negative balance"() {
+		when:
+		TransactionTracker transactionTracker = new TransactionTracker(transactionTotal: -24).save(flush: true, failOnError: true)
 
-	def cleanup() {
-	}
-
-	void "test something"() {
+		then:
+		thrown(Exception)
 	}
 }
