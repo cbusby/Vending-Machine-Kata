@@ -5,7 +5,12 @@ class ProductDispenser {
 	static constraints = {
 	}
 
-	boolean dispenseItem(def productId) {
-		return true
+	boolean dispenseItem(Long productId) {
+		Product product = Product.findById(productId)
+		if(product.stock > 0) {
+			return true
+		}
+
+		return false
 	}
 }
