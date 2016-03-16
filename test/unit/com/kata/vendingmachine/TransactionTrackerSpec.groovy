@@ -29,7 +29,7 @@ class TransactionTrackerSpec extends Specification {
 		transactionTracker.transactionTotal == 80
 	}
 
-	void "given coin return triggered, transaction total should be 0USD"() {
+	void "given returnCoins triggered, transaction total should be 0USD"() {
 		given:
 		TransactionTracker transactionTracker = new TransactionTracker(transactionTotal: 1.25).save(flush: true)
 
@@ -37,10 +37,10 @@ class TransactionTrackerSpec extends Specification {
 		transactionTracker.returnCoins()
 
 		then:
-		transactionTracker.transactionTotal == 0.00
+		transactionTracker.transactionTotal == 0
 	}
 
-	void "given coin return is triggered and the user has not inserted coins, it prints insert coin"() {
+	void "given returnCoins is triggered and the user has not inserted coins, it prints insert coin"() {
 		when:
 		TransactionTracker transactionTracker = new TransactionTracker(transactionTotal: 0).save(flush: true)
 
@@ -48,7 +48,7 @@ class TransactionTrackerSpec extends Specification {
 		transactionTracker.returnCoins() == "INSERT COINS"
 	}
 
-	void "given coin return is triggered, the stock of coins is reduced according to the value of the transaction total"() {
+	void "given coin return is triggered, returnCoins reduces the stock of coins according to the value of the transaction total"() {
 		given:
 		Coin quarter = new Coin(weight: 2, circumference: 2, centAmount: 25, stock: 2).save(flush: true)
 		Coin dime = new Coin(weight: 2, circumference: 2, centAmount: 10, stock: 2).save(flush: true)
@@ -60,5 +60,17 @@ class TransactionTrackerSpec extends Specification {
 		then:
 		quarter.stock == 1
 		dime.stock == 1
+	}
+
+	void "given the machine has no coins in stock, and the user inserts a coin, returnCoins returns the coin"() {
+		given:
+		Coin quarter = new Coin(weight: 2, circumference: 2, centAmount: 25, stock: 1).save(flush: true)
+		TransactionTracker transactionTracker = new TransactionTracker(transactionTotal: 25).save(flush: true)
+
+		when:
+		transactionTracker.returnCoins()
+
+		then:
+		quarter.stock == 0
 	}
 }
