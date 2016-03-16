@@ -11,4 +11,8 @@ class TransactionTracker {
 	def returnCoins() {
 		transactionTotal = 0
 	}
+
+	double addCoinToTransactionTotal(Coin coin) {
+		transactionTotal = transactionTotal + coin.dollarAmount
+	}
 }
