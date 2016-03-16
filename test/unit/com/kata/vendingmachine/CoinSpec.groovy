@@ -15,7 +15,7 @@ class CoinSpec extends Specification {
 
 	void "coin cannot be created with negative inputs"() {
 		when:
-		Coin coin = new Coin(weight: -1.0, circumference: -1.0, dollarAmount: -1.0).save(flush: true, failOnError: true)
+		new Coin(weight: -1.0, circumference: -1.0, dollarAmount: -1.0).save(flush: true, failOnError: true)
 
 		then:
 		thrown(Exception)
