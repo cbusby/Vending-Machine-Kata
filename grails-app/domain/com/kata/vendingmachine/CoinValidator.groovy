@@ -14,6 +14,7 @@ class CoinValidator {
 		if (!coin) {
 			return 0.0
 		} else {
+			coin.stock++
 			return coin.dollarAmount
 		}
 	}

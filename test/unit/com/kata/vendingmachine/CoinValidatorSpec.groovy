@@ -32,4 +32,14 @@ class CoinValidatorSpec extends Specification {
 		expect:
 		0.10 == coinValidator.returnCoinValue(17.91, 2.268)
 	}
+
+	void "given a valid coin, returnCoinValue will increment the stock of that coin"() {
+		given:
+		Coin coin = new Coin(weight: 1, circumference: 1, dollarAmount: 1).save(flush: true)
+		CoinValidator coinValidator = new CoinValidator()
+		coinValidator.returnCoinValue(1, 1)
+
+		expect:
+		coin.stock == 1
+	}
 }
