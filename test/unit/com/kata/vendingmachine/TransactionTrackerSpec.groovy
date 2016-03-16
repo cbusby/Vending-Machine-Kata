@@ -39,4 +39,12 @@ class TransactionTrackerSpec extends Specification {
 		then:
 		transactionTracker.transactionTotal == 0.00
 	}
+
+	void "given coin return is triggered and no coins are in stock it prints insert coin"() {
+		when:
+		TransactionTracker transactionTracker = new TransactionTracker(transactionTotal: 0).save(flush: true)
+
+		then:
+		transactionTracker.returnCoins() == "INSERT COINS"
+	}
 }

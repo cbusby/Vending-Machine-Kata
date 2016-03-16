@@ -10,6 +10,7 @@ class TransactionTracker {
 
 	def returnCoins() {
 		transactionTotal = 0
+		return "INSERT COINS"
 	}
 
 	double addCoinToTransactionTotal(Coin coin) {
