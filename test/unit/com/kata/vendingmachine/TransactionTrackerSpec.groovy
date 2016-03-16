@@ -22,4 +22,15 @@ class TransactionTrackerSpec extends Specification {
 		expect:
 		newTotal == 1.00
 	}
+
+	void "given coin return triggered, transaction total should be 0USD"() {
+		given:
+		TransactionTracker transactionTracker = new TransactionTracker(transactionTotal: 1.25).save(flush: true)
+
+		when:
+		transactionTracker.returnCoins()
+
+		then:
+		transactionTracker.transactionTotal == 0.00
+	}
 }

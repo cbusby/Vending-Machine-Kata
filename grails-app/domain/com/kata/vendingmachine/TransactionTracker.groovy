@@ -7,4 +7,8 @@ class TransactionTracker {
 	static constraints = {
 		transactionTotal nullable: false, min: 0.0.toDouble()
 	}
+
+	def returnCoins() {
+		transactionTotal = 0
+	}
 }
