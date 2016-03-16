@@ -7,7 +7,7 @@ import spock.lang.Specification
 class CoinSpec extends Specification {
 	void "coin is valid when all inputs are given"() {
 		given:
-		Coin coin = new Coin(weight: 1.0, circumference: 1.0, dollarAmount: 1.0)
+		Coin coin = new Coin(weight: 1.0, circumference: 1.0, centAmount: 1)
 
 		expect:
 		coin.validate()
@@ -15,7 +15,7 @@ class CoinSpec extends Specification {
 
 	void "coin cannot be created with negative inputs"() {
 		when:
-		new Coin(weight: -1.0, circumference: -1.0, dollarAmount: -1.0).save(flush: true, failOnError: true)
+		new Coin(weight: -1.0, circumference: -1.0, centAmount: -1).save(flush: true, failOnError: true)
 
 		then:
 		thrown(Exception)
@@ -23,7 +23,7 @@ class CoinSpec extends Specification {
 
 	void "a coin has a stock of zero when created"() {
 		given:
-		Coin coin = new Coin(weight: 1.0, circumference: 1.0, dollarAmount: 1.0).save(flush: true)
+		Coin coin = new Coin(weight: 1.0, circumference: 1.0, centAmount: 1).save(flush: true)
 
 		expect:
 		coin.stock == 0

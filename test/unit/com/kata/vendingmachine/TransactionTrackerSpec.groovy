@@ -18,15 +18,15 @@ class TransactionTrackerSpec extends Specification {
 
 	void "given new coin, transactionTotal can be updated"() {
 		given:
-		Coin quarter = new Coin(weight: 2, circumference: 2, dollarAmount: 0.25, stock: 3).save(flush: true)
-		TransactionTracker transactionTracker = new TransactionTracker(transactionTotal: 0.75).save(flush: true)
+		Coin quarter = new Coin(weight: 2, circumference: 2, centAmount: 25, stock: 3).save(flush: true)
+		TransactionTracker transactionTracker = new TransactionTracker(transactionTotal: 75).save(flush: true)
 
 		when:
-		Coin nickel = new Coin(weight: 2, circumference: 2, dollarAmount: 0.05, stock: 1).save(flush: true)
+		Coin nickel = new Coin(weight: 2, circumference: 2, centAmount: 5, stock: 1).save(flush: true)
 		transactionTracker.addCoinToTransactionTotal(nickel)
 
 		then:
-		transactionTracker.transactionTotal == 0.80
+		transactionTracker.transactionTotal == 80
 	}
 
 	void "given coin return triggered, transaction total should be 0USD"() {
@@ -40,11 +40,25 @@ class TransactionTrackerSpec extends Specification {
 		transactionTracker.transactionTotal == 0.00
 	}
 
-	void "given coin return is triggered and no coins are in stock it prints insert coin"() {
+	void "given coin return is triggered and the user has not inserted coins, it prints insert coin"() {
 		when:
 		TransactionTracker transactionTracker = new TransactionTracker(transactionTotal: 0).save(flush: true)
 
 		then:
 		transactionTracker.returnCoins() == "INSERT COINS"
+	}
+
+	void "given coin return is triggered, the stock of coins is reduced according to the value of the transaction total"() {
+		given:
+		Coin quarter = new Coin(weight: 2, circumference: 2, centAmount: 25, stock: 2).save(flush: true)
+		Coin dime = new Coin(weight: 2, circumference: 2, centAmount: 10, stock: 2).save(flush: true)
+		TransactionTracker transactionTracker = new TransactionTracker(transactionTotal: 35).save(flush: true)
+
+		when:
+		transactionTracker.returnCoins()
+
+		then:
+		quarter.stock == 1
+		dime.stock == 1
 	}
 }
