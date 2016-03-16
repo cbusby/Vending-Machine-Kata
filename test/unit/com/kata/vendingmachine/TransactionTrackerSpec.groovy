@@ -13,4 +13,13 @@ class TransactionTrackerSpec extends Specification {
 		then:
 		thrown(Exception)
 	}
+
+	void "given new coin, transactionTotal can be updated"() {
+		given:
+		TransactionTracker transactionTracker = new TransactionTracker(transactionTotal: 0.75).save(flush: true)
+		double newTotal = transactionTracker.transactionTotal + 0.25
+
+		expect:
+		newTotal == 1.00
+	}
 }
