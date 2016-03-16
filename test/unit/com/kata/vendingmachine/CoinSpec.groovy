@@ -20,4 +20,12 @@ class CoinSpec extends Specification {
 		then:
 		thrown(Exception)
 	}
+
+	void "a coin has a stock of zero when created"() {
+		given:
+		Coin coin = new Coin(weight: 1.0, circumference: 1.0, dollarAmount: 1.0).save(flush: true)
+
+		expect:
+		coin.stock == 0
+	}
 }
