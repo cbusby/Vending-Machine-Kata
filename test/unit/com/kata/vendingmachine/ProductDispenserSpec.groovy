@@ -28,4 +28,12 @@ class ProductDispenserSpec extends Specification {
 		expect:
 		false == productDispenser.dispenseItem(soda.id)
 	}
+
+	void "given invalid input, the ProductDispenser will not dispense a product"() {
+		given:
+		ProductDispenser productDispenser = new ProductDispenser()
+
+		expect:
+		false == productDispenser.dispenseItem(1)
+	}
 }
