@@ -10,7 +10,7 @@ class TransactionTrackerSpec extends Specification {
 
 	void "TransactionTracker cannot have a negative balance"() {
 		when:
-		TransactionTracker transactionTracker = new TransactionTracker(transactionTotal: -24).save(flush: true, failOnError: true)
+		new TransactionTracker(transactionTotal: -24).save(flush: true, failOnError: true)
 
 		then:
 		thrown(Exception)
@@ -26,7 +26,7 @@ class TransactionTrackerSpec extends Specification {
 
 	void "given new coin, transactionTotal can be updated"() {
 		given:
-		Coin quarter = new Coin(weight: 2, circumference: 2, centAmount: 25, stock: 3).save(flush: true)
+		new Coin(weight: 2, circumference: 2, centAmount: 25, stock: 3).save(flush: true)
 		TransactionTracker transactionTracker = new TransactionTracker(transactionTotal: 75).save(flush: true)
 
 		when:
