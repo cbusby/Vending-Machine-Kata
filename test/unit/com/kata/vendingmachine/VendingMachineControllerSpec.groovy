@@ -3,18 +3,18 @@ package com.kata.vendingmachine
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
-/**
- * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
- */
+
 @TestFor(VendingMachineController)
 class VendingMachineControllerSpec extends Specification {
 
-	def setup() {
-	}
+	void "index should call the MachineInitializerService"() {
+		given:
+		controller.machineInitializerServie = Mock(MachineInitializerService)
 
-	def cleanup() {
-	}
+		when:
+		controller.index()
 
-	void "test something"() {
+		then:
+		1 * controller.machineInitializerServie.initializeVendingMachine()
 	}
 }
