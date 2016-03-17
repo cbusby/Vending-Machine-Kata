@@ -8,7 +8,7 @@ import spock.lang.Specification
 class ProductSpec extends Specification {
 	void "a product cannot be created with a negtive price"() {
 		when:
-		Product product = new Product(stock: 0, price: -1.2).save(flush: true, failOnError: true)
+		Product product = new Product(stock: 0, price: -100).save(flush: true, failOnError: true)
 
 		then:
 		thrown(Exception)

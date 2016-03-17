@@ -3,10 +3,10 @@ package com.kata.vendingmachine
 class Product {
 
 	int stock
-	double price
+	int price
 
 	static constraints = {
 		stock nullable: false
-		price nullable: false, min: 0.0.toDouble()
+		price nullable: false, min: 0
 	}
 }
