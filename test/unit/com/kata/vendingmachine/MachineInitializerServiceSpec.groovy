@@ -1,20 +1,18 @@
 package com.kata.vendingmachine
 
+import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
-/**
- * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
- */
 @TestFor(MachineInitializerService)
+@Mock([Coin, CoinValidator, Product, ProductDispenser, TransactionTracker, VendingMachine])
 class MachineInitializerServiceSpec extends Specification {
 
-	def setup() {
-	}
+	void "initializeVendingMachine should create the valid coins"() {
+		given:
+		service.initializeVendingMachine()
 
-	def cleanup() {
-	}
-
-	void "test something"() {
+		expect:
+		Coin.getAll().size() == 3
 	}
 }
