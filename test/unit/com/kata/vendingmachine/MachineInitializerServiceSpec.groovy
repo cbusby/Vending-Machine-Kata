@@ -23,4 +23,15 @@ class MachineInitializerServiceSpec extends Specification {
 		expect:
 		Product.getAll().size() == 3
 	}
+
+	void "initializeVendingMachine creates the classes that do work"() {
+		given:
+		service.initializeVendingMachine()
+
+		expect:
+		CoinValidator.getAll().size() == 1
+		ProductDispenser.getAll().size() == 1
+		TransactionTracker.getAll().size() == 1
+		VendingMachine.getAll().size() == 1
+	}
 }
