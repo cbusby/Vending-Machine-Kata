@@ -2,7 +2,7 @@ package com.kata.vendingmachine
 
 class TransactionTracker {
 
-	int transactionTotal
+	int transactionTotal = 0
 
 	static constraints = {
 		transactionTotal nullable: false, min: 0

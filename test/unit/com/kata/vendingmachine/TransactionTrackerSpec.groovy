@@ -16,6 +16,14 @@ class TransactionTrackerSpec extends Specification {
 		thrown(Exception)
 	}
 
+	void "TransactionTracker total is initially 0USD"() {
+		when:
+		TransactionTracker transactionTracker = new TransactionTracker()
+
+		then:
+		transactionTracker.transactionTotal == 0
+	}
+
 	void "given new coin, transactionTotal can be updated"() {
 		given:
 		Coin quarter = new Coin(weight: 2, circumference: 2, centAmount: 25, stock: 3).save(flush: true)
