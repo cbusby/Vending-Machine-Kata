@@ -13,4 +13,12 @@ class ProductSpec extends Specification {
 		then:
 		thrown(Exception)
 	}
+
+	void "a product can be created without a name"() {
+		when:
+		new Product(stock: 0, price: 0).save(flush: true, failOnError: true)
+
+		then:
+		notThrown(Exception)
+	}
 }
