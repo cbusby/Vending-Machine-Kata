@@ -15,6 +15,7 @@ class ProductDispenserSpec extends Specification {
 
 		expect:
 		true  == productDispenser.dispenseItem(chips.id)
+		chips.stock == 0
 	}
 
 	void "given soda is selected but there is no stock, the ProductDispenser will not dispense soda"() {
