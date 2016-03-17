@@ -15,4 +15,12 @@ class MachineInitializerServiceSpec extends Specification {
 		expect:
 		Coin.getAll().size() == 3
 	}
+
+	void "initializeVendingMachine should create the current products"() {
+		given:
+		service.initializeVendingMachine()
+
+		expect:
+		Product.getAll().size() == 3
+	}
 }
