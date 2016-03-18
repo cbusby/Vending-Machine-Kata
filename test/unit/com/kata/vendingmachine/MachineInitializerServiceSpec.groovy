@@ -8,17 +8,17 @@ import spock.lang.Specification
 @Mock([Coin, CoinValidator, Product, ProductDispenser, TransactionTracker, VendingMachine])
 class MachineInitializerServiceSpec extends Specification {
 
-	void "initializeVendingMachine should create the valid coins"() {
+	void "initializeCoins should create the valid coins"() {
 		given:
-		service.initializeVendingMachine()
+		service.initializeCoins()
 
 		expect:
 		Coin.getAll().size() == 3
 	}
 
-	void "initializeVendingMachine should create the current products"() {
+	void "initializeProducts should create the current products"() {
 		given:
-		service.initializeVendingMachine()
+		service.initializeProducts()
 
 		expect:
 		Product.getAll().size() == 3
@@ -32,6 +32,17 @@ class MachineInitializerServiceSpec extends Specification {
 		CoinValidator.getAll().size() == 1
 		ProductDispenser.getAll().size() == 1
 		TransactionTracker.getAll().size() == 1
+		VendingMachine.getAll().size() == 1
+	}
+
+	void "initializeVendingMachine will not instantiate if a machine is already created"() {
+		given:
+		VendingMachine vendingMachine = new VendingMachine().save(flush: true)
+
+		when:
+		service.initializeVendingMachine()
+
+		then:
 		VendingMachine.getAll().size() == 1
 	}
 }
